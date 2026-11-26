@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tender Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -6px rgba(15, 23, 42, 0.06)',
+            'tooltip': '0 14px 34px -4px rgba(15, 23, 42, 0.16), 0 4px 10px -2px rgba(15, 23, 42, 0.06)',
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased min-h-screen py-5 px-3 sm:px-6 lg:px-8">
+
+  <!-- Main SaaS Dashboard Wrapper -->
+  <div id="dashboard-wrapper" class="max-w-[1340px] mx-auto space-y-4">
+
+    <!-- 1. CONTROL TOOLBAR -->
+    <section id="main-control-toolbar" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-card space-y-3">
+      <!-- Row 1: Tenderer Multi-Select Filter -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div id="tenderer-filter-bar" class="flex flex-wrap items-center gap-2">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Row 2: Variance Basis & Threshold -->
+      <div id="variance-toolbar-row" class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+        <!-- Populated by app.js -->
+      </div>
+    </section>
+
+    <!-- 2. TENDER COMPARISON TABLE -->
+    <section id="main-table-section" class="bg-white border border-slate-200 rounded-2xl shadow-card overflow-hidden">
+      <!-- Table Top Header Bar -->
+      <div class="px-5 py-3.5 border-b border-slate-200 bg-slate-50/50 flex flex-wrap items-center justify-between gap-2.5">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <h2 id="table-main-title" class="text-sm sm:text-base font-semibold tracking-tight text-slate-900">
+            Tender Comparison
+          </h2>
+          <div id="color-legend" class="flex flex-wrap items-center gap-2.5 text-[10.5px] text-slate-500 pl-2 border-l border-slate-200"></div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            id="table-view-tabs"
+            class="inline-flex rounded-lg border border-slate-200 overflow-hidden bg-white shadow-2xs"
+            role="tablist"
+            aria-label="Submission display mode"
+          ></div>
+          <span class="text-xs text-slate-500 hidden sm:inline">
+            Unit: <strong class="font-semibold text-slate-700">S$/Day</strong> · Rating: <strong class="font-semibold text-slate-700">10/15kA</strong>
+          </span>
+        </div>
+      </div>
+
+      <!-- Scrollable Table Container -->
+      <div id="table-scroll-container" class="overflow-x-auto overflow-y-auto max-h-[680px] table-scroll">
+        <table id="evaluation-table" class="w-full border-collapse text-center">
+          <!-- Rendered dynamically by app.js -->
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Anchored Row Chat Comment Popover -->
+  <div
+    id="row-comment-popover"
+    role="dialog"
+    aria-label="Row comments"
+    class="hidden fixed z-50 w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden"
+  ></div>
+
+  <!-- Floating 5-Step Progression Tooltip -->
+  <div
+    id="heatmap-tooltip"
+    role="tooltip"
+    class="fixed z-50 pointer-events-none opacity-0 transition-opacity duration-150 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-tooltip p-3.5 w-[348px] text-left"
+    style="top: 0; left: 0;"
+  ></div>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
